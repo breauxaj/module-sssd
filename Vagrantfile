@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.synced_folder ".", "/home/vagrant/sysctl", type: "rsync", rsync__exclude: ".git/"
+  config.vm.synced_folder ".", "/home/vagrant/sssd", type: "rsync", rsync__exclude: ".git/"
   config.ssh.insert_key = false
 
   config.vm.define "centos" do |centos|
