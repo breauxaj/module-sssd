@@ -8,35 +8,39 @@
 class sssd::params {
   $sssd_package_ensure = 'latest'
 
-  case $::operatingsystem {
-    'Amazon': {
-
-    }
-    'CentOS', 'OracleLinux', 'RedHat': {
-      case $::operatingsystemmajrelease {
-        '6': {
-
-        }
-        '7': {
-
-        }
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
         default: {
-          fail("The ${module_name} module is not supported on an ${::operatingsystem} ${::operatingsystemmajrelease} distribution.")
+          case $::operatingsystemmajrelease {
+            default: {
+
+            }
+          }
         }
       }
     }
-    'Debian': {
-      case $::operatingsystemmajrelease {
-        '8': {
+    'RedHat': {
+      case $::operatingsystem {
+        'Amazon': {
+          case $::operatingsystemmajrelease {
+            default: {
 
+            }
+          }
         }
         default: {
-          fail("The ${module_name} module is not supported on an ${::operatingsystem} ${::operatingsystemmajrelease} distribution.")
+          case $::operatingsystemmajrelease {
+            default: {
+
+            }
+          }
         }
       }
     }
     default: {
-      fail("The ${module_name} module is not supported on an ${::operatingsystem} based system.")
+      fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
     }
   }
+
 }
